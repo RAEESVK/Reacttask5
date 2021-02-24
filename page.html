@@ -1,0 +1,141 @@
+<html>
+<head>
+ <meta charset="utf-8" />
+ 
+ <title>Hello React!</title>
+ 
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" 
+integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" 
+crossorigin="anonymous">
+<script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin />
+
+<script
+  src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
+  crossorigin
+/>
+
+<script
+  src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
+  crossorigin
+/>
+
+</head>
+
+<body>
+
+<div id="root"></div>
+
+ <script type="text/babel">
+
+
+     class App extends React.Component {
+		  state = {
+		  todos: []
+		  }
+		   componentDidMount() {
+			fetch('http://5d3aabf4fa091c0014470ca0.mockapi.io/users')
+			.then(res => res.json())
+			.then((data) => {
+			  this.setState({ todos: data })
+			  console.log(this.state.todos)
+			})
+			.catch(console.log)
+		  }
+		  
+		  let active = 2;
+			let items = [];
+			for (let number = 1; number <= 5; number++) {
+			  items.push(
+				<Pagination.Item key={number} active={number === active}>
+				  {number}
+				</Pagination.Item>,
+			  );
+			}
+
+			const paginationBasic = (
+			  <div>
+				<Pagination>{items}</Pagination>
+				<br />
+
+				<Pagination size="lg">{items}</Pagination>
+				<br />
+
+				<Pagination size="sm">{items}</Pagination>
+			  </div>
+			);
+
+		  
+		  
+		  
+        render(paginationBasic) {
+          return  (
+		  
+       <div className="container">
+		<Pagination>
+		  <Pagination.First />
+		  <Pagination.Prev />
+		  <Pagination.Item>{1}</Pagination.Item>
+		  <Pagination.Ellipsis />
+
+		  <Pagination.Item>{10}</Pagination.Item>
+		  <Pagination.Item>{11}</Pagination.Item>
+		  <Pagination.Item active>{12}</Pagination.Item>
+		  <Pagination.Item>{13}</Pagination.Item>
+		  <Pagination.Item disabled>{14}</Pagination.Item>
+
+		  <Pagination.Ellipsis />
+		  <Pagination.Item>{20}</Pagination.Item>
+		  <Pagination.Next />
+		  <Pagination.Last />
+		</Pagination>
+		
+        <div className="col-xs-12">
+        <h1>My Todos</h1>
+		<h5 className="card-title">title</h5>
+        {this.state.todos.map((todo) => (
+          <div className="card">
+            <div className="card-body">
+			
+              <h5 className="card-title">{todo.id}</h5>
+              <h6 className="card-subtitle mb-2 text-muted">
+              { todo.completed &&
+                <span>
+                Completed
+                </span>
+              }
+              { !todo.completed &&
+                <span>
+                  Pending
+                </span>
+              }              
+              </h6>
+			  <h5 className="card-title">{todo.name}</h5>
+            </div>
+          </div>
+        ))}
+        </div>
+       </div>
+    );
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById('root')) 
+ </script>
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" 
+integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" 
+crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" 
+integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" 
+crossorigin="anonymous"></script>
+</body>
+
+</html>
